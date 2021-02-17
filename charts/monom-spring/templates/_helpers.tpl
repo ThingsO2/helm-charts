@@ -40,6 +40,8 @@ helm.sh/chart: {{ include "monom-spring.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+app.kubernetes.io/component: {{ required "labelComponent is required" .Values.labelComponent }}
+app.kubernetes.io/part-of: {{ required "labelPartOf is required" .Values.labelPartOf }}
 {{- end }}
 
 {{/*
