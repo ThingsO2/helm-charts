@@ -3,6 +3,16 @@ entries:
   monom-spring:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-02-18T10:24:23.523297133Z"
+    description: A Helm chart for Kubernetes
+    digest: f36c9e8d17fc8fa01baa97e1539ab0e9617a5e5f5526f2c8b4f9d4e5a744c504
+    name: monom-spring
+    type: application
+    urls:
+    - https://github.com/ThingsO2/helm-charts/releases/download/monom-spring-0.2.1/monom-spring-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-02-18T10:01:26.440544655Z"
     description: A Helm chart for Kubernetes
     digest: 6e97a30a9ea6a6c469fc95c8d11b8d6b80d5478e61a4bf3c99cb27a2d88fddfa
