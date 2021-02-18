@@ -30,10 +30,10 @@ app.kubernetes.io/part-of: {{ required "labelPartOf is required" .Values.labelPa
  Expand the name of the chart.
  */}}
 {{- define "monom-spring.instance" -}}
-{{- if .Values.namespaceOverride -}}
+{{- if .Values.instanceOverride -}}
 {{- .Values.instanceOverride -}}
 {{- else -}}
-{{- printf "%s-%s" .Release.Name (randAlphaNum 6) }}
+{{- printf "%s-%s" .Release.Name "randAlphaNum" }}
 {{- end }}
 {{- end }}
 
