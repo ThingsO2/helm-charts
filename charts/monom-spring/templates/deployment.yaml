@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "monom-spring.fullname" . }}
+  name: {{ include "monom-spring.name" . }}
   labels:
     {{- include "monom-spring.labels" . | nindent 4 }}
 spec:
@@ -29,32 +29,20 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: ${#triggerResolvedArtifactByType("docker/image")["reference"]}
+          image: {{ required "image uri is required" .Values.image.uri }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 8080
               protocol: TCP
+          {{- if .Values.readinessProbe }}
           readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: http
-              scheme: HTTP
-            failureThreshold: 5
-            initialDelaySeconds: 55
-            periodSeconds: 25
-            successThreshold: 1
-            timeoutSeconds: 5
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.livenessProbe }}
           livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: http
-              scheme: HTTP
-            failureThreshold: 2
-            initialDelaySeconds: 90
-            periodSeconds: 25
-            successThreshold: 1
-            timeoutSeconds: 5
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

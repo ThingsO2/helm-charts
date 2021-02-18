@@ -6,12 +6,11 @@ replicaCount: 1
 
 image:
   pullPolicy: IfNotPresent
+  uri: ""
 
-
-nameOverride: ""
-fullnameOverride: ""
 labelComponent: ""
 labelPartOf: ""
+instanceOverride: ""
 
 podAnnotations: {}
 
@@ -52,6 +51,27 @@ resources:
   requests:
     cpu: 250m
     memory: 512Mi
+
+readinessProbe:
+  httpGet:
+    path: /actuator/health
+    port: http
+    scheme: HTTP
+  failureThreshold: 5
+  initialDelaySeconds: 55
+  periodSeconds: 25
+  successThreshold: 1
+  timeoutSeconds: 5
+livenessProbe:
+  httpGet:
+    path: /actuator/health
+    port: http
+    scheme: HTTP
+  failureThreshold: 2
+  initialDelaySeconds: 90
+  periodSeconds: 25
+  successThreshold: 1
+  timeoutSeconds: 5
 
 autoscaling:
   enabled: false
