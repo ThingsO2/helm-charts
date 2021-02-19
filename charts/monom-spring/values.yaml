@@ -44,6 +44,8 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+env: {}
+
 resources:
   limits:
     cpu: 750m
