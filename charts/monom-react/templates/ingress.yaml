@@ -1,0 +1,20 @@
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := include "monom-react.name" . -}}
+{{- $svcPort := .Values.service.port -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "monom-react.labels" . | nindent 4 }}
+  annotations:
+    {{- include "monom-react.ingress-annotations" . | nindent 4 }}
+spec:
+  rules:
+    - host: {{ required "ingress.host is required" .Values.ingress.host | quote }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ $fullName }}
+              servicePort: {{ $svcPort }}
+{{- end }}
