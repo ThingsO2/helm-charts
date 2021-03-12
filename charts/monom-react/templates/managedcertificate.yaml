@@ -1,0 +1,10 @@
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := include "monom-react.name" . -}}
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: {{ $fullName }}
+spec:
+  domains:
+  - {{ required "ingress.host is required" .Values.ingress.host | quote }}
+{{- end }}
