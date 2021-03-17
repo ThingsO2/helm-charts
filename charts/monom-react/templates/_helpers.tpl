@@ -46,6 +46,17 @@ app.kubernetes.io/name: {{ include "monom-react.name" . }}
 {{- end }}
 
 {{/*
+ Service
+ */}}
+{{- define "monom-react.service-type" -}}
+{{- if .Values.ingress.enabled -}}
+NodePort
+{{- else -}}
+{{ .Values.service.type }}
+{{- end }}
+{{- end }}
+
+{{/*
  Ingress
  */}}
 {{- define "monom-react.ingress-annotations" -}}
