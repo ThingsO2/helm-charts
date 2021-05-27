@@ -44,3 +44,28 @@ app.kubernetes.io/instance: {{ include "monom-spring.instance" . }}
 {{- define "monom-spring.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "monom-spring.name" . }}
 {{- end }}
+
+{{/*
+ Service
+ */}}
+{{- define "monom-spring.service-type" -}}
+{{- if .Values.ingress.enabled -}}
+NodePort
+{{- else -}}
+{{ .Values.service.type }}
+{{- end }}
+{{- end }}
+
+{{/*
+ Ingress
+ */}}
+{{- define "monom-spring.ingress-annotations" -}}
+{{- if .Values.ingress.annotations -}}
+{{- .Values.ingress.annotations -}}
+{{- else -}}
+kubernetes.io/ingress.class: gce
+networking.gke.io/v1beta1.FrontendConfig: {{ include "monom-spring.name" . }}-ingress-security-config
+kubernetes.io/ingress.global-static-ip-name: {{ include "monom-spring.name" . }}
+networking.gke.io/managed-certificates: {{ include "monom-spring.name" . }}
+{{- end }}
+{{- end }}
