@@ -30,13 +30,16 @@ serviceAccountName: ""
 service:
   type: ClusterIP
   port: 80
+  additionalPorts: []
 
 ingress:
   enabled: false
   annotations: {}
   host: ""
+  healthCheck: {}
 
 env: {}
+additionalPorts: []
 
 resources:
   limits:
