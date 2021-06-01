@@ -1,9 +1,14 @@
+{{- $fullName := include "monom-spring.name" . -}}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "monom-spring.name" . }}
   labels:
     {{- include "monom-spring.labels" . | nindent 4 }}
+  {{- if .Values.ingress.healthCheck }}
+  annotations:
+    cloud.google.com/backend-config: '{{- dict "default" $fullName | toJson }}'
+  {{- end }}
 spec:
   type: {{ include "monom-spring.service-type" . }}
   ports:
