@@ -1,0 +1,55 @@
+# Default values for awm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  pullPolicy: IfNotPresent
+  uri: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+
+securityContext: {}
+
+serviceAccountName: ""
+
+service:
+  type: ClusterIP
+  port: 8443
+
+ingress:
+  enabled: true
+  annotations: {}
+  host: ""
+
+env:
+- name: WILDFLY_XMX
+  value: 8096m
+- name: DB_MAX_POOL_SIZE
+  value: "100"
+- name: PORT_HTTP
+  value: "8080"
+- name: PORT_HTTPS
+  value: "8443"
+- name: PORT_MANAGEMENT
+  value: "9990"
+
+resources:
+  limits:
+    cpu: "2"
+    memory: 4Gi
+  requests:
+    cpu: "1"
+    memory: 1Gi
+
+readinessProbe: {}
+livenessProbe: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
