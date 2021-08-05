@@ -62,8 +62,8 @@ NodePort
 {{- .Values.ingress.annotations -}}
 {{- else -}}
 kubernetes.io/ingress.class: gce
-networking.gke.io/v1beta1.FrontendConfig: {{ include "awm.name" . }}-ingress-security-config
-kubernetes.io/ingress.global-static-ip-name: {{ include "awm.name" . }}
-networking.gke.io/managed-certificates: {{ include "awm.name" . }}
+networking.gke.io/v1beta1.FrontendConfig: {{ required "gkeAnnotationPrefix is required" .Values.ingress.gkeAnnotationPrefix }}-ingress-security-config
+kubernetes.io/ingress.global-static-ip-name: {{ required "gkeAnnotationPrefix is required" .Values.ingress.gkeAnnotationPrefix }}
+networking.gke.io/managed-certificates: {{ required "gkeAnnotationPrefix is required" .Values.ingress.gkeAnnotationPrefix }}
 {{- end }}
 {{- end }}

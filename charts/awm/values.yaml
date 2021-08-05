@@ -21,6 +21,7 @@ service:
   port: 8443
 
 ingress:
+  gkeAnnotationPrefix: ""
   enabled: true
   annotations: {}
   host: ""
