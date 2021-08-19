@@ -20,4 +20,8 @@ spec:
                 port:
                   number: {{ $svcPort }}
             pathType: ImplementationSpecific
+            path: /*
+          {{ - with .Values.additional.backends }}
+            {{ - toYaml . | nindent 8 }}
+          {{ - end }}
 {{- end }}
