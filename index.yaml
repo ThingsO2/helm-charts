@@ -34,6 +34,16 @@ entries:
   monom-react:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-08-20T06:43:48.839669654Z"
+    description: A Helm chart for Kubernetes
+    digest: e72edb9ec263d7240b0aaee862f6ca6fabac8e1508712254993ce6ebc38a36cc
+    name: monom-react
+    type: application
+    urls:
+    - https://github.com/ThingsO2/helm-charts/releases/download/monom-react-0.1.0/monom-react-0.1.0.tgz
+    version: 0.1.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-05-31T14:10:53.066578524Z"
     description: A Helm chart for Kubernetes
     digest: 60a87cfc5f43fdc63e98b474f2d2295b0fbea615e4e2f5edefc620a7d53dca96
