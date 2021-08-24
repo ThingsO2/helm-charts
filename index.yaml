@@ -3,6 +3,16 @@ entries:
   awm:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-08-24T08:07:08.725052304Z"
+    description: A Helm chart for Kubernetes
+    digest: fa3dd8596387a43dff41c8394e2558ac68971dbec4a5570c4480aefa3482466e
+    name: awm
+    type: application
+    urls:
+    - https://github.com/ThingsO2/helm-charts/releases/download/awm-0.0.4/awm-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-08-05T08:58:26.278249666Z"
     description: A Helm chart for Kubernetes
     digest: fbca99bded65a7e26981cde543a72cd4377b7caf71d2c591fdae73f9074cb8a9
@@ -32,6 +42,16 @@ entries:
     - https://github.com/ThingsO2/helm-charts/releases/download/awm-0.0.1/awm-0.0.1.tgz
     version: 0.0.1
   monom-react:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-08-24T08:07:08.860713439Z"
+    description: A Helm chart for Kubernetes
+    digest: b68058a631960c1364da7e7de2526444a4008f81aa4c1be68c78c624d50837e9
+    name: monom-react
+    type: application
+    urls:
+    - https://github.com/ThingsO2/helm-charts/releases/download/monom-react-0.1.1/monom-react-0.1.1.tgz
+    version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-08-20T06:43:48.839669654Z"
@@ -83,6 +103,16 @@ entries:
     - https://github.com/ThingsO2/helm-charts/releases/download/monom-react-0.0.1/monom-react-0.0.1.tgz
     version: 0.0.1
   monom-spring:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-08-24T08:07:08.988332108Z"
+    description: A Helm chart for Kubernetes
+    digest: 2815540b40ecb15fda791045f3eacbd652722bad14f7873dd75004d017703d54
+    name: monom-spring
+    type: application
+    urls:
+    - https://github.com/ThingsO2/helm-charts/releases/download/monom-spring-0.4.5/monom-spring-0.4.5.tgz
+    version: 0.4.5
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-06-01T07:46:11.808464097Z"
