@@ -1,4 +1,5 @@
 {{- $fullName := include "monom-spring.name" . -}}
+{{- $backendConfigDict := dict .Values.service.port $fullName -}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -7,7 +8,7 @@ metadata:
     {{- include "monom-spring.labels" . | nindent 4 }}
   {{- if .Values.ingress.healthCheck }}
   annotations:
-    cloud.google.com/backend-config: '{{- dict "default" $fullName | toJson }}'
+    cloud.google.com/backend-config: '{{- dict "ports" $backendConfigDict | toJson }}'
   {{- end }}
 spec:
   type: {{ include "monom-spring.service-type" . }}
