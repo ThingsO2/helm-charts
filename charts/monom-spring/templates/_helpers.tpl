@@ -61,7 +61,11 @@ NodePort
  */}}
 {{- define "monom-spring.ingress-annotations" -}}
 {{- if .Values.ingress.annotations -}}
-{{- .Values.ingress.annotations -}}
+{{- toYaml .Values.ingress.annotations }}
+kubernetes.io/ingress.class: gce
+networking.gke.io/v1beta1.FrontendConfig: {{ include "monom-spring.name" . }}-ingress-security-config
+kubernetes.io/ingress.global-static-ip-name: {{ include "monom-spring.name" . }}
+networking.gke.io/managed-certificates: {{ include "monom-spring.name" . }}
 {{- else -}}
 kubernetes.io/ingress.class: gce
 networking.gke.io/v1beta1.FrontendConfig: {{ include "monom-spring.name" . }}-ingress-security-config
