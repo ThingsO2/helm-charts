@@ -3,6 +3,16 @@ entries:
   awm:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2021-09-22T15:44:37.713633075Z"
+    description: A Helm chart for Kubernetes
+    digest: fab930c5aaa7a44d0a5e823c58c8434c9e6806389b30e61c73f40ffc6beddf81
+    name: awm
+    type: application
+    urls:
+    - https://github.com/ThingsO2/helm-charts/releases/download/awm-0.1.4/awm-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-08-24T08:07:08.725052304Z"
     description: A Helm chart for Kubernetes
     digest: fa3dd8596387a43dff41c8394e2558ac68971dbec4a5570c4480aefa3482466e
