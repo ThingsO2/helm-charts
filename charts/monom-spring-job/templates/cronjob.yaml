@@ -1,0 +1,64 @@
+{{- if semverCompare ">=1.20-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: batch/v1
+{{- else -}}
+apiVersion: batch/v1beta1
+{{- end }}
+kind: CronJob
+metadata:
+  name: {{ include "monom-spring-job.name" . }}
+  labels:
+    {{- include "monom-spring-job.labels" . | nindent 4 }}
+spec:
+  concurrencyPolicy: {{ .Values.concurrencyPolicy }}
+  failedJobsHistoryLimit: {{ .Values.failedJobsHistoryLimit }}
+  schedule: {{ required "schelude is required" .Values.schedule | quote }}
+  successfulJobsHistoryLimit: {{ .Values.successfulJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          {{- with .Values.podAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          labels:
+            {{- include "monom-spring-job.selectorLabels" . | nindent 12 }}
+        spec:
+          {{- if .Values.serviceAccountName }}
+          serviceAccountName: {{ .Values.serviceAccountName }}
+          {{- end }}
+          securityContext:
+            {{- toYaml .Values.podSecurityContext | nindent 12 }}
+          containers:
+            - name: {{ include "monom-spring-job.name" . }}
+              securityContext:
+                {{- toYaml .Values.securityContext | nindent 16 }}
+              image: {{ required "image uri is required" .Values.image.uri }}
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              {{- if .Values.env }}
+              env:
+                {{- toYaml .Values.env | nindent 16 }}
+              {{- end }}
+              resources:
+                {{- toYaml .Values.resources | nindent 16 }}
+              {{- if .Values.volumeMounts }}
+              volumeMounts:
+                {{- toYaml .Values.volumeMounts | nindent 16 }}
+              {{- end }}
+          {{- if .Values.volumes }}
+          volumes:
+            {{- toYaml .Values.volumes | nindent 12 }}
+          {{- end }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          restartPolicy: {{ .Values.restartPolicy }}
