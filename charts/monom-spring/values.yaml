@@ -43,7 +43,7 @@ additionalPorts: []
 
 resources:
   limits:
-    cpu: 500m
+    cpu: 3
     memory: 500Mi
   requests:
     cpu: 50m
@@ -55,7 +55,7 @@ readinessProbe:
     port: http
     scheme: HTTP
   failureThreshold: 5
-  initialDelaySeconds: 55
+  initialDelaySeconds: 20
   periodSeconds: 25
   successThreshold: 1
   timeoutSeconds: 5
@@ -65,7 +65,7 @@ livenessProbe:
     port: http
     scheme: HTTP
   failureThreshold: 2
-  initialDelaySeconds: 90
+  initialDelaySeconds: 25
   periodSeconds: 25
   successThreshold: 1
   timeoutSeconds: 5
