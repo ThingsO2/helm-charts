@@ -1,11 +1,11 @@
-name: Deploy
+name: Lint
 on:
   pull_request:
     branches:
       - main
 
 jobs:
-  linter:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,6 +29,4 @@ jobs:
         if: always()
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            AWM:
-            {{ steps.lint.outputs.awm }}
+          body: ${{join(steps.lint.outputs.*, '\n')}}
