@@ -23,10 +23,19 @@ jobs:
           echo ::set-output name=monom-react::$(kube-linter lint ./charts/monom-react/)
           echo ::set-output name=monom-spring::$(kube-linter lint ./charts/monom-spring/)
           echo ::set-output name=monom-spring-job::$(kube-linter lint ./charts/monom-spring-job/)
+          kube-linter lint ./charts/awm/
+          kube-linter lint ./charts/monom-react/
+          kube-linter lint ./charts/monom-spring/
+          kube-linter lint ./charts/monom-spring-job/
 
       - name: Create comment with lint output
         uses: peter-evans/create-or-update-comment@v1
         if: always()
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          body: ${{join(steps.lint.outputs.*, '\n')}}
+          body: |
+            AWM:
+
+            ```
+            ${{steps.lint.outputs.awm}}
+            ```
