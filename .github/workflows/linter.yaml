@@ -39,3 +39,21 @@ jobs:
             ```
             ${{steps.lint.outputs.awm}}
             ```
+
+            monom-react:
+
+            ```
+            ${{steps.lint.outputs.monom-react}}
+            ```
+
+            monom-spring:
+
+            ```
+            ${{steps.lint.outputs.monom-spring}}
+            ```
+
+            monom-spring-job:
+
+            ```
+            ${{steps.lint.outputs.monom-spring-job}}
+            ```
