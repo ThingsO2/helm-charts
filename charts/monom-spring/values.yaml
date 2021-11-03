@@ -86,3 +86,6 @@ affinity: {}
 volumeMounts: {}
 
 volumes: {}
+
+subscriptionsTerramonomCommand: apply
+subscriptions: []

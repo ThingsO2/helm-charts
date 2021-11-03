@@ -1,0 +1,37 @@
+{{- $fullName := include "monom-spring.name" . -}}
+{{- $labels := include "monom-spring.labels" . -}}
+{{- $command := .Values.subscriptionsTerramonomCommand -}}
+{{ range .Values.subscriptions }}
+---
+apiVersion: terramonom.monom.ai/v1alpha1
+kind: PubSubSubscriptions
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- $labels | nindent 4 }}
+spec:
+  command: {{ $command }}
+  variables:
+    project: monom-mvp-{{ .environment }}
+    subscriptions:
+      - topic_name: {{ .topic_name }}
+        subscription_name: {{ .subscription_name }}
+        {{- if .ack_deadline_seconds }}
+        ack_deadline_seconds: {{ .ack_deadline_seconds }}
+        {{- end }}
+        {{- if .message_retention_duration }}
+        message_retention_duration: {{ .message_retention_duration }}
+        {{- end }}
+        {{- if .filter }}
+        filter: {{ .filter }}
+        {{- end }}
+        {{- if .retain_acked_messages }}
+        retain_acked_messages: {{ .retain_acked_messages }}
+        {{- end }}
+  backend:
+    type: remote
+    name: pubsubsubscriptions-{{ $fullName }}-{{ .environment }}
+    organization:
+    tokenSecretName: terramonom-operator-tfe
+  serviceAccountName: terramonom-operator-pubsubsubscriptions
+{{- end }}
