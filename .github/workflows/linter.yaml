@@ -1,0 +1,34 @@
+name: Deploy
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Install kube-linter
+        run: brew install kube-linter
+
+      - name: Lint
+        id: lint
+        run: |
+          echo ::set-output name=awm::$(kube-linter lint ./charts/awm/)
+          echo ::set-output name=monom-react::$(kube-linter lint ./charts/monom-react/)
+          echo ::set-output name=monom-spring::$(kube-linter lint ./charts/monom-spring/)
+          echo ::set-output name=monom-spring-job::$(kube-linter lint ./charts/monom-spring-job/)
+
+      - name: Create comment with lint output
+        uses: peter-evans/create-or-update-comment@v1
+        if: always()
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            AWM:
+            {{ steps.lint.outputs.awm }}
