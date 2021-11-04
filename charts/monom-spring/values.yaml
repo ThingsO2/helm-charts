@@ -82,6 +82,10 @@ tolerations: []
 
 affinity: {}
 
-volumeMounts: {}
+volumeMounts:
+  - mountPath: /tmp/
+    name: tmp-volume
 
-volumes: {}
+volumes:
+  - name: tmp-volume
+    emptyDir: {}
