@@ -19,14 +19,14 @@ jobs:
       - name: Lint
         id: lint
         run: |
-          echo ::set-output name=awm::$(kube-linter lint ./charts/awm/)
-          echo ::set-output name=monom-react::$(kube-linter lint ./charts/monom-react/)
-          echo ::set-output name=monom-spring::$(kube-linter lint ./charts/monom-spring/)
-          echo ::set-output name=monom-spring-job::$(kube-linter lint ./charts/monom-spring-job/)
-          kube-linter lint ./charts/awm/
-          kube-linter lint ./charts/monom-react/
-          kube-linter lint ./charts/monom-spring/
-          kube-linter lint ./charts/monom-spring-job/
+          echo ::set-output name=awm::$(kube-linter --exclude latest-tag lint ./charts/awm/)
+          echo ::set-output name=monom-react::$(kube-linter --exclude latest-tag lint ./charts/monom-react/)
+          echo ::set-output name=monom-spring::$(kube-linter --exclude latest-tag lint ./charts/monom-spring/)
+          echo ::set-output name=monom-spring-job::$(kube-linter --exclude latest-tag lint ./charts/monom-spring-job/)
+          kube-linter --exclude latest-tag lint ./charts/awm/
+          kube-linter --exclude latest-tag lint ./charts/monom-react/
+          kube-linter --exclude latest-tag lint ./charts/monom-spring/
+          kube-linter --exclude latest-tag lint ./charts/monom-spring-job/
 
       - name: Create comment with lint output
         uses: peter-evans/create-or-update-comment@v1
