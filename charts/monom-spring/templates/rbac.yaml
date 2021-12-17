@@ -1,0 +1,28 @@
+{{- if .Values.rbac.enabled -}}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: {{ .Values.rbac.roleType }}
+metadata:
+  labels:
+    {{- include "monom-spring.labels" . | nindent 4 }}
+  name: {{ include "monom-spring.name" . }}
+rules:
+  {{- toYaml .Values.rbac.rules | nindent 2 }}
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: {{ .Values.rbac.bindType }}
+metadata:
+  name: {{ include "monom-spring.name" . }}
+  labels:
+    {{- include "monom-spring.labels" . | nindent 4 }}
+subjects:
+- kind: ServiceAccount
+  name: {{ .Values.serviceAccountName }}
+  namespace: {{ .Release.Namespace }}
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: {{ .Values.rbac.roleType }} 
+  name: {{ include "monom-spring.name" . }}
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}
