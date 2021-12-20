@@ -20,7 +20,6 @@ subjects:
 - kind: ServiceAccount
   name: {{ .Values.serviceAccountName }}
   namespace: {{ .Release.Namespace }}
-  apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: {{ .Values.rbac.roleType }} 
   name: {{ include "monom-spring.name" . }}
