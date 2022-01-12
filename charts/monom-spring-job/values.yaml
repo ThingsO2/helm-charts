@@ -19,16 +19,15 @@ restartPolicy: "Never"
 
 podAnnotations: {}
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  fsGroup: 1000
+  runAsUser: 1000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext:
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  runAsNonRoot: true
+  runAsUser: 1000
 
 serviceAccountName: ""
 
@@ -49,6 +48,10 @@ tolerations: []
 
 affinity: {}
 
-volumeMounts: {}
+volumeMounts:
+  - mountPath: /tmp/
+    name: tmp-volume
 
-volumes: {}
+volumes:
+  - name: tmp-volume
+    emptyDir: {}

@@ -14,16 +14,15 @@ instanceOverride: ""
 
 podAnnotations: {}
 
-podSecurityContext: {}
-  # fsGroup: 2000
+podSecurityContext:
+  fsGroup: 1000
+  runAsUser: 1000
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+securityContext:
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  runAsNonRoot: true
+  runAsUser: 1000
 
 serviceAccountName: ""
 
@@ -43,7 +42,7 @@ additionalPorts: []
 
 resources:
   limits:
-    cpu: 3
+    cpu: 500m
     memory: 500Mi
   requests:
     cpu: 50m
@@ -55,7 +54,7 @@ readinessProbe:
     port: http
     scheme: HTTP
   failureThreshold: 5
-  initialDelaySeconds: 20
+  initialDelaySeconds: 55
   periodSeconds: 25
   successThreshold: 1
   timeoutSeconds: 5
@@ -65,7 +64,7 @@ livenessProbe:
     port: http
     scheme: HTTP
   failureThreshold: 2
-  initialDelaySeconds: 25
+  initialDelaySeconds: 80
   periodSeconds: 25
   successThreshold: 1
   timeoutSeconds: 5
@@ -77,15 +76,26 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+rbac:
+  enabled: false
+  roleType: Role
+  #roleType: ClusterRole
+  bindType: RoleBinding
+  #bindType: ClusterRoleBinding
+  rules: {}
+
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
 
-volumeMounts: {}
-
-volumes: {}
+volumeMounts:
+  - mountPath: /tmp/
+    name: tmp-volume
+volumes:
+  - name: tmp-volume
+    emptyDir: {}
 
 subscriptionsTerramonomCommand: apply
 subscriptions: []
