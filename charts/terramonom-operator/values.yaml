@@ -1,0 +1,6 @@
+# Default values for terramonom-operator.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+subscriptionsTerramonomCommand: apply
+subscriptions: []
