@@ -354,4 +354,15 @@ entries:
     urls:
     - https://github.com/ThingsO2/helm-charts/releases/download/monom-spring-job-1.0.0/monom-spring-job-1.0.0.tgz
     version: 1.0.0
+  terramonom-operator:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-01-12T15:31:20.90307656Z"
+    description: A Helm chart for Kubernetes
+    digest: 06854c3a25417798a3fae2eb6b6b3fd43afc9240bf679d113622bfab35ba5752
+    name: terramonom-operator
+    type: application
+    urls:
+    - https://github.com/ThingsO2/helm-charts/releases/download/terramonom-operator-1.0.0/terramonom-operator-1.0.0.tgz
+    version: 1.0.0
 generated: "2021-02-17T16:14:57.615299273Z"
