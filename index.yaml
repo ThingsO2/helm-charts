@@ -357,6 +357,16 @@ entries:
   terramonom-operator:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-01-14T09:21:30.770186392Z"
+    description: A Helm chart for Kubernetes
+    digest: bb681817d58656514af0f33434ece96d6cb9f13b39b4b9b24b515b0f6a37fe15
+    name: terramonom-operator
+    type: application
+    urls:
+    - https://github.com/ThingsO2/helm-charts/releases/download/terramonom-operator-1.0.1/terramonom-operator-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-01-12T15:31:20.90307656Z"
     description: A Helm chart for Kubernetes
     digest: 06854c3a25417798a3fae2eb6b6b3fd43afc9240bf679d113622bfab35ba5752
