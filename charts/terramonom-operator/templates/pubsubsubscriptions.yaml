@@ -1,6 +1,7 @@
 {{- $fullName := include "terramonom-operator.name" . -}}
 {{- $labels := include "terramonom-operator.labels" . -}}
 {{- $command := .Values.subscriptionsTerramonomCommand -}}
+{{- $environment := .Values.subscriptionsEnvironment -}}
 {{ range .Values.subscriptions }}
 ---
 apiVersion: terramonom.monom.ai/v1alpha1
@@ -13,7 +14,7 @@ metadata:
 spec:
   command: {{ $command }}
   variables:
-    project: monom-mvp-{{ .environment }}
+    project: monom-mvp-{{ $environment }}
     subscriptions:
       - topic_name: {{ .topic_name }}
         subscription_name: {{ .subscription_name }}
@@ -31,7 +32,7 @@ spec:
         {{- end }}
   backend:
     type: remote
-    name: pubsubsubscriptions-{{ $fullName }}-{{ .environment }}
+    name: pubsubsubscriptions-{{ $fullName }}-{{ $environment }}
     organization: terramonom-operator-resources
     tokenSecretName: terramonom-operator-tfe
   serviceAccountName: terramonom-operator-pubsubsubscriptions
