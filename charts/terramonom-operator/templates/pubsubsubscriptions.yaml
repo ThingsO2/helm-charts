@@ -2,7 +2,7 @@
 {{- $labels := include "terramonom-operator.labels" . -}}
 {{- $command := .Values.subscriptionsTerramonomCommand -}}
 {{- $environment := .Values.subscriptionsEnvironment -}}
-{{ range .Values.subscriptions }}
+{{- if .Values.subscriptions }}
 ---
 apiVersion: terramonom.monom.ai/v1alpha1
 kind: PubSubSubscriptions
@@ -16,6 +16,7 @@ spec:
   variables:
     project: monom-mvp-{{ $environment }}
     subscriptions:
+      {{- range .Values.subscriptions }}
       - topic_name: {{ .topic_name }}
         subscription_name: {{ .subscription_name }}
         {{- if .ack_deadline_seconds }}
@@ -30,6 +31,7 @@ spec:
         {{- if .retain_acked_messages }}
         retain_acked_messages: {{ .retain_acked_messages }}
         {{- end }}
+      {{- end }}
   backend:
     type: remote
     name: pubsubsubscriptions-{{ $fullName }}-{{ $environment }}
