@@ -26,6 +26,8 @@ securityContext:
 
 serviceAccountName: ""
 
+priorityClassName: ""
+
 service:
   type: ClusterIP
   port: 80

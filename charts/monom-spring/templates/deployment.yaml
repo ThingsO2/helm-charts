@@ -20,6 +20,9 @@ spec:
       labels:
         {{- include "monom-spring.selectorLabels" . | nindent 8 }}
     spec:
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName }}
+      {{- end }}
       {{- if .Values.serviceAccountName }}
       serviceAccountName: {{ .Values.serviceAccountName }}
       {{- end }}
