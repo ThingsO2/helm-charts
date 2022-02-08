@@ -1,0 +1,14 @@
+{{- if .Values.pdb.enabled -}}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "monom-spring.name" . }}
+  labels:
+    {{- include "monom-spring.labels" . | nindent 4 }}
+spec:
+  maxUnavailable: {{ .Values.pdb.maxUnavailable }}
+  minAvailable: {{ .Values.pdb.minAvailable }}
+  selector:
+    matchLabels:
+      {{- include "monom-spring.selectorLabels" . | nindent 6 }}
+{{- end }}
