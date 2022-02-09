@@ -79,7 +79,7 @@ autoscaling:
 pdb:
   enabled: true
   maxUnavailable: 50%
-  minAvailable: 50%
+  #minAvailable: 50%
   
 rbac:
   enabled: false

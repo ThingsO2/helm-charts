@@ -2,9 +2,9 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: {{ include "monom-spring.name" . }}
+  name: {{ include "monom-react.name" . }}
   labels:
-    {{- include "monom-spring.labels" . | nindent 4 }}
+    {{- include "monom-react.labels" . | nindent 4 }}
 spec:
   {{- if .Values.pdb.maxUnavailable }}
   maxUnavailable: {{ .Values.pdb.maxUnavailable }}
@@ -14,5 +14,5 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "monom-spring.selectorLabels" . | nindent 6 }}
+      {{- include "monom-react.selectorLabels" . | nindent 6 }}
 {{- end }}
