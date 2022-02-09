@@ -16,3 +16,4 @@ spec:
     matchLabels:
       {{- include "monom-react.selectorLabels" . | nindent 6 }}
 {{- end }}
+
