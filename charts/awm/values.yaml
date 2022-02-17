@@ -18,9 +18,10 @@ serviceAccountName: ""
 
 service:
   type: ClusterIP
+  name: http
   port: 8080
   additionalPorts: []
-    # exmaple:
+    # example:
     #- name: http
     #  port: 8443
     #  protocol: TCP
