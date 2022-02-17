@@ -8,8 +8,16 @@ spec:
   type: {{ include "awm.service-type" . }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
+      targetPort: {{ .Values.service.name }}
       protocol: TCP
-      name: http
+      name: {{ .Values.service.name }}
+    {{- if .Values.service.additionalPorts }}
+    {{- range .Values.service.additionalPorts }}
+    - port: {{ .port }}
+      targetPort: {{ .name }}
+      protocol: {{ .protocol }}
+      name: {{ .name }}
+    {{- end }}
+    {{- end }}
   selector:
     {{- include "awm.selectorLabels" . | nindent 4 }}
