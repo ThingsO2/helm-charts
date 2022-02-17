@@ -19,6 +19,11 @@ serviceAccountName: ""
 service:
   type: ClusterIP
   port: 8080
+  additionalPorts: []
+    # exmaple:
+    #- name: http
+    #  port: 8443
+    #  protocol: TCP
 
 ingress:
   gkeAnnotationPrefix: ""
