@@ -14,10 +14,14 @@ spec:
     - host: {{ required "ingress.host is required" .Values.ingress.host | quote }}
       http:
         paths:
-          - backend:
-              service:
-                name: {{ $fullName }}
-                port:
-                  number: {{ $svcPort }}
+          {{- range .Values.ingress.backends -}}
+          {{ $backendName := printf "%s-%s" $fullName .suffixName }}
+          - path: {{ .path }}
             pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ $backendName }}
+                port:
+                  number: {{ .port }}
+          {{- end }}
 {{- end }}
