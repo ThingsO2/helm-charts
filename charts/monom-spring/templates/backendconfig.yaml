@@ -1,12 +1,13 @@
 {{- $fullName := include "monom-spring.name" . -}}
 {{- range .Values.ingress.backends }}
 ---
-{{- $backendName := printf "%s-%s" $fullName .suffixName -}}
+{{ $backendName := printf "%s-%s" $fullName .suffixName }}
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
   name: {{ $backendName }}
-
+  labels:
+    {{- include "monom-spring.labels" $ | nindent 4 }}
 spec:
   {{- if .sessionAffinityType }}
   sessionAffinity:

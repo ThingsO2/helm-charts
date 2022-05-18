@@ -14,8 +14,8 @@ spec:
     - host: {{ required "ingress.host is required" .Values.ingress.host | quote }}
       http:
         paths:
-          {{ range .Values.ingress.backends }}
-          {{- $backendName := printf "%s-%s" $fullName .suffixName -}}
+          {{- range .Values.ingress.backends -}}
+          {{ $backendName := printf "%s-%s" $fullName .suffixName }}
           - path: {{ .path }}
             pathType: ImplementationSpecific
             backend:
