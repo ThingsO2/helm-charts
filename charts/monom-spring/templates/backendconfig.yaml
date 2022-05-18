@@ -1,12 +1,25 @@
-{{- if .Values.ingress.healthCheck -}}
 {{- $fullName := include "monom-spring.name" . -}}
+{{- range .Values.ingress.backends }}
+---
+{{- $backendName := printf "%s-%s" $fullName .suffixName -}}
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
 metadata:
-  name: {{ $fullName }}
-  labels:
-    {{- include "monom-spring.labels" . | nindent 4 }}
+  name: {{ $backendName }}
+
 spec:
+  {{- if .sessionAffinityType }}
+  sessionAffinity:
+    affinityType: {{ .sessionAffinityType }}
+  {{- end }}
+  {{- if .timeoutSec }}
+  timeoutSec: {{ .timeoutSec }}
+  {{- end }}
+  {{- if .drainingTimeoutSec }}
+  connectionDraining:
+    drainingTimeoutSec: {{ .drainingTimeoutSec }}
+  {{- end }}
   healthCheck:
-    {{- toYaml .Values.ingress.healthCheck | nindent 4 }}
+    {{- toYaml .healthcheck | nindent 4 }}
+...
 {{- end }}

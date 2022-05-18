@@ -35,7 +35,14 @@ ingress:
   enabled: false
   annotations: {}
   host: ""
-  healthCheck: {}
+  backends: []
+#    - path: /*
+#      suffixName: ""
+#      port: 80
+#      healthcheck: {}
+#      sessionAffinityType:
+#      timeoutSec: ""
+#      drainingTimeoutSec: ""
 
 env: {}
 additionalPorts: []
