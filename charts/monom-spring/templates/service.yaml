@@ -1,15 +1,40 @@
-{{- $fullName := include "monom-spring.name" . -}}
-{{- $backendConfigDict := dict .Values.service.port $fullName -}}
+{{- $fullName := include "monom-spring.name" . }}
+{{- $additionalPorts := .Values.service.additionalPorts | default dict }}
+{{- if .Values.ingress.backends }}
+{{- range .Values.ingress.backends }}
+{{- $serviceName := printf "%s-%s" $fullName .suffixName }}
+{{- $backendConfigDict := dict .port $serviceName }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $serviceName }}
+  labels:
+    {{- include "monom-spring.labels" $ | nindent 4 }}
+  annotations:
+    cloud.google.com/backend-config: '{{- dict "ports" $backendConfigDict | toJson }}'
+spec:
+  type: {{ include "monom-spring.service-type" $ }}
+  ports:
+    - port: {{ .port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+    {{- if $additionalPorts }}
+    {{- toYaml $additionalPorts | nindent 4 }}
+    {{- end }}
+  selector:
+    {{- include "monom-spring.selectorLabels" $ | nindent 4 }}
+...
+{{- end }}
+{{- else }}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "monom-spring.name" . }}
   labels:
     {{- include "monom-spring.labels" . | nindent 4 }}
-  {{- if .Values.ingress.healthCheck }}
-  annotations:
-    cloud.google.com/backend-config: '{{- dict "ports" $backendConfigDict | toJson }}'
-  {{- end }}
 spec:
   type: {{ include "monom-spring.service-type" . }}
   ports:
@@ -22,3 +47,4 @@ spec:
     {{- end }}
   selector:
     {{- include "monom-spring.selectorLabels" . | nindent 4 }}
+{{- end}}
