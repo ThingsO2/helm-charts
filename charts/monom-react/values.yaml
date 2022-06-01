@@ -74,9 +74,9 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 pdb:
-  enabled: true
-  maxUnavailable: 50%
-  #minAvailable: 50%
+  enabled: false
+  minAvailable: 50%
+  #maxUnavailable: 50%
 
 nodeSelector: {}
 
