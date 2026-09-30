@@ -1,0 +1,71 @@
+# LLM.txt — helm-charts
+
+> TODO(developer): this file is a skeleton. Terraform creates it once and then
+> ignores its content, so everything you write here survives module upgrades.
+>
+> Its audience is an LLM, not a human: agents read it to answer questions about
+> helm-charts without opening the source. Write what the code does not already make
+> obvious — intent, boundaries, and the contracts with the outside world. Keep
+> it updated whenever new features or logic are introduced (standards.md).
+>
+> Delete each TODO line as you fill its section in. Leave a section with an
+> explicit "None." rather than removing it — "no external APIs" is useful
+> information; a missing section is indistinguishable from an unmaintained one.
+
+## Description
+
+TODO(developer): what this service is for, in a few sentences. Its
+responsibility, the business problem it solves, and the architectural layer it
+belongs to. State what it deliberately does NOT do — the boundary is what stops
+an agent from attributing someone else's behaviour to this service.
+
+## External API references
+
+TODO(developer): every API this service CONSUMES.
+
+- Other MonoM microservices, by repository name, and what is called on them.
+- Third-party APIs, with the vendor and the purpose.
+- For each one: the protocol (REST, RSocket, gRPC), and what happens when it is
+  unavailable — is the failure propagated, retried, or degraded?
+
+The APIs this service EXPOSES belong in `openapi.yaml`, not here. Reference that
+file rather than duplicating it, because a duplicate will drift.
+
+## Variables used
+
+TODO(developer): the configuration this service reads.
+
+- Environment variables, with their meaning and default.
+- Properties resolved from `centralized-config` (spring-config-server).
+- Secrets, by name only — NEVER the value, and never a sample that looks like a
+  real credential.
+- For each one: which behaviour changes when it changes.
+
+## Events and messaging
+
+TODO(developer): topics or streams published and consumed (Pub/Sub, RSocket),
+with the payload shape and whether delivery is at-least-once. Write "None." if
+this service is purely synchronous.
+
+## Data and storage
+
+TODO(developer): the datastores this service owns or reads (MongoDB
+collections, BigQuery datasets, buckets), the main entities, and which of them
+this service is the source of truth for.
+
+## Entry points
+
+TODO(developer): where a reader should start in the source — main classes or
+modules, schedulers, listeners. Point at paths, so an agent can go straight to
+the code instead of searching for it.
+
+## Operational notes
+
+TODO(developer): anything that surprises an operator — startup time, known
+bottlenecks, whether the service is safe to scale horizontally, manual recovery
+steps.
+
+## References
+
+TODO(developer): links to the README, the ArgoCD application, dashboards,
+runbooks, and the Jira epic this service came from.
